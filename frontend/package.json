@@ -4,9 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/build-diagnostic.js",
     "build": "next build",
+    "postbuild": "node scripts/build-diagnostic.js --post",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "diagnostic": "node scripts/build-diagnostic.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
