@@ -5,7 +5,8 @@
  * When the backend is ready, replace mock functions with real API calls.
  */
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+// API_BASE_URL will be used when connecting to real backend
+// const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
 
 // Types
 export interface Artwork {
@@ -91,7 +92,8 @@ const mockPalettes: Palette[] = [
 // API Functions (Mock implementations)
 export const api = {
   // Upload image
-  async uploadImage(file: File): Promise<{ artwork_id: string }> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async uploadImage(_file: File): Promise<{ artwork_id: string }> {
     // Simulate upload delay
     await new Promise(resolve => setTimeout(resolve, 1000));
     
@@ -101,7 +103,8 @@ export const api = {
   },
 
   // Process image
-  async processImage(artworkId: string): Promise<{ job_id: string }> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async processImage(_artworkId: string): Promise<{ job_id: string }> {
     await new Promise(resolve => setTimeout(resolve, 500));
     
     return {
@@ -110,7 +113,8 @@ export const api = {
   },
 
   // Get processing status
-  async getProcessingStatus(jobId: string): Promise<{
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async getProcessingStatus(_jobId: string): Promise<{
     status: 'pending' | 'processing' | 'completed' | 'failed';
     progress?: number;
   }> {

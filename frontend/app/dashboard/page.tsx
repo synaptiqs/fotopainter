@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
@@ -119,11 +120,13 @@ export default function DashboardPage() {
             <div className="space-y-6">
               <div className="text-center">
                 <h3 className="text-xl font-semibold mb-4 text-heading">Image Uploaded</h3>
-                <div className="aspect-video bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                  <img
+                <div className="aspect-video bg-gray-200 rounded-lg mb-4 flex items-center justify-center relative overflow-hidden">
+                  <Image
                     src={URL.createObjectURL(uploadedFile)}
                     alt="Uploaded"
-                    className="max-h-64 rounded-lg"
+                    fill
+                    className="object-contain rounded-lg"
+                    unoptimized
                   />
                 </div>
                 <p className="text-sm text-gray-600 mb-4">{uploadedFile.name}</p>

@@ -139,9 +139,9 @@ export default function PricingPage() {
           <h2 className="text-2xl font-bold text-heading mb-6 text-center">Frequently Asked Questions</h2>
           <div className="space-y-6">
             <div>
-              <h3 className="font-semibold text-lg mb-2">What's included in a digital download?</h3>
+              <h3 className="font-semibold text-lg mb-2">What&apos;s included in a digital download?</h3>
               <p className="text-gray-600">
-                You'll receive a ZIP file containing a high-resolution PNG template (300 DPI), 
+                You&apos;ll receive a ZIP file containing a high-resolution PNG template (300 DPI), 
                 a color guide PDF with paint recommendations, and step-by-step instructions.
               </p>
             </div>
@@ -160,7 +160,7 @@ export default function PricingPage() {
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-lg mb-2">What if I'm not satisfied?</h3>
+              <h3 className="font-semibold text-lg mb-2">What if I&apos;m not satisfied?</h3>
               <p className="text-gray-600">
                 We offer a 30-day money-back guarantee for digital downloads. Physical kits can be returned 
                 unopened within 14 days of delivery.

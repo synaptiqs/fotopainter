@@ -15,12 +15,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
-      - name: Deploy to Railway (Frontend)
-        uses: bervProject/railway-deploy@v3.0.0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          railway_token: ${{ secrets.RAILWAY_TOKEN }}
-          service: fotopainter-frontend
-          project_id: ${{ secrets.RAILWAY_PROJECT_ID }}
+          node-version: '20'
+      
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+      
+      - name: Deploy to Railway (Frontend)
+        working-directory: ./frontend
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: |
+          railway link ${{ secrets.RAILWAY_PROJECT_ID }}
+          railway up --service fotopainter-frontend
         continue-on-error: true
   
   deploy-backend:
@@ -32,11 +41,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
-      - name: Deploy to Railway (Backend)
-        uses: bervProject/railway-deploy@v3.0.0
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          railway_token: ${{ secrets.RAILWAY_TOKEN }}
-          service: fotopainter-backend
-          project_id: ${{ secrets.RAILWAY_PROJECT_ID }}
+          python-version: '3.11'
+      
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+      
+      - name: Deploy to Railway (Backend)
+        working-directory: ./backend
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: |
+          railway link ${{ secrets.RAILWAY_PROJECT_ID }}
+          railway up --service fotopainter-backend
         continue-on-error: true
 
