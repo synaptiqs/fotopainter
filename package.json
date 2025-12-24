@@ -5,6 +5,8 @@
   "private": true,
   "scripts": {
     "auto-commit": "node scripts/auto-commit.js",
+    "auto-push": "node scripts/auto-push.js",
+    "fix-and-push": "node scripts/fix-and-push.js",
     "setup-git": "node scripts/setup-git.js"
   },
   "keywords": [
