@@ -213,6 +213,68 @@ nixPkgs = ["nodejs_20"]
 
 ---
 
+### Issue 9: Nixpacks Persistent Failures - Switched to Dockerfile
+**Error from Build Logs** (2025-12-24):
+```
+error: undefined variable 'npm'
+at /app/.nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix:19:19:
+    19|         nodejs_20 npm
+                  ^
+```
+
+**Root Cause**:
+- Nixpacks continued to fail even after removing `npm` from nixPkgs
+- Railway's nixpacks builder was generating incorrect nix files
+- Nixpacks configuration was unreliable and causing repeated build failures
+
+**Solution Applied**:
+- **Switched from nixpacks to Dockerfile** for more reliable builds
+- Created production-ready multi-stage Dockerfile using Node.js 20 Alpine
+- Dockerfile uses Next.js standalone mode for optimized production builds
+- Railway will automatically detect and use the Dockerfile
+
+**Files Created**:
+- `frontend/Dockerfile` - Multi-stage Docker build configuration
+- `frontend/.dockerignore` - Optimizes build by excluding unnecessary files
+
+**Files Updated**:
+- `frontend/railway.toml` - Changed builder from `nixpacks` to `dockerfile`
+
+**Dockerfile Features**:
+- Multi-stage build (deps → builder → runner) for smaller image size
+- Uses Node.js 20 Alpine base image
+- Leverages Next.js standalone output mode
+- Runs as non-root user for security
+- Optimized layer caching
+
+**Status**: ✅ Fixed - Using Dockerfile instead of nixpacks for reliable builds
+
+---
+
+### Issue 10: Railway startCommand Overrides Dockerfile CMD
+**Error**: 
+- `startCommand = "npm start"` in `railway.toml` overrides Dockerfile `CMD ["node", "server.js"]`
+- Railway uses `startCommand` from `railway.toml` instead of Dockerfile `CMD` when using Dockerfile builder
+- Production Docker image only contains standalone output (no `node_modules` or `package.json`)
+- Running `npm start` fails because npm and package.json don't exist in final image
+
+**Root Cause**:
+- Railway's `startCommand` in `railway.toml` takes precedence over Dockerfile `CMD` instruction
+- The Dockerfile uses Next.js standalone mode which only includes `server.js` and static files
+- No `node_modules` or `package.json` in the final production image
+
+**Fix Applied**:
+- Removed `startCommand` from `frontend/railway.toml`
+- Railway will now use the Dockerfile's `CMD ["node", "server.js"]` instruction
+- Added comment explaining why `startCommand` was removed
+
+**Files Fixed**:
+- `frontend/railway.toml` - Removed conflicting `startCommand` line
+
+**Status**: ✅ Fixed - Railway will use Dockerfile CMD for startup
+
+---
+
 ## Git & Automation Setup
 
 ### Git Repository Setup

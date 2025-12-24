@@ -1,9 +1,10 @@
 [build]
-builder = "nixpacks"
-buildCommand = "npm ci && npm run build"
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
 
 [deploy]
-startCommand = "npm start"
+# startCommand removed - Dockerfile CMD will be used instead
+# Dockerfile CMD: ["node", "server.js"] (standalone mode)
 healthcheckPath = "/"
 healthcheckTimeout = 100
 restartPolicyType = "on_failure"
