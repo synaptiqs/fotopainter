@@ -167,15 +167,49 @@ at /app/.nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix:19:9:
 # Before:
 nixPkgs = ["nodejs-20_x", "npm-10_x"]
 
-# After:
+# After (initial fix):
 nixPkgs = ["nodejs_20", "npm"]
+
+# After (final fix - npm comes bundled with nodejs):
+nixPkgs = ["nodejs_20"]
 ```
 
-**File**: `nixpacks.toml`
+**File**: `nixpacks.toml` and `frontend/nixpacks.toml`
 
 **Commit**: `71eab7a - Fix nixpacks.toml: Correct Node.js package name syntax`
 
 **Status**: ✅ Fixed - Build should now progress past nix-env installation
+
+---
+
+### Issue 8: Nixpacks Error - Undefined Variable 'npm'
+**Error from Build Logs** (2025-12-24):
+```
+error: undefined variable 'npm'
+at /app/.nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix:19:19:
+    19|         nodejs_20 npm
+                  ^
+```
+
+**Root Cause**:
+- `npm` is not a valid nix package name in nixpkgs
+- npm comes bundled with nodejs, so it doesn't need to be specified separately
+- Railway was using root-level `nixpacks.toml` which had `["nodejs_20", "npm"]`
+
+**Fix Applied**:
+```toml
+# Before:
+nixPkgs = ["nodejs_20", "npm"]
+
+# After:
+nixPkgs = ["nodejs_20"]
+```
+
+**Files Fixed**:
+- `nixpacks.toml` (root level)
+- `frontend/nixpacks.toml` (for consistency)
+
+**Status**: ✅ Fixed - npm is bundled with nodejs_20, no need to specify separately
 
 ---
 
