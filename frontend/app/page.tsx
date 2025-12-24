@@ -214,7 +214,7 @@ export default function Home() {
               </Link>
             </Card>
             
-            <Card className="bg-white text-gray-900 border-2 border-[#A0522D]">
+            <Card className="relative bg-white text-gray-900 border-2 border-[#A0522D]">
               <div className="absolute top-4 right-4 bg-[#A0522D] text-white px-3 py-1 rounded-full text-sm font-semibold">
                 Popular
               </div>
