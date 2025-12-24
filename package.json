@@ -1,0 +1,22 @@
+{
+  "name": "fotopainter",
+  "version": "1.0.0",
+  "description": "AI-powered platform that transforms photos into paint-by-number artworks",
+  "private": true,
+  "scripts": {
+    "auto-commit": "node scripts/auto-commit.js",
+    "setup-git": "node scripts/setup-git.js"
+  },
+  "keywords": [
+    "paint-by-number",
+    "ai",
+    "art",
+    "photography"
+  ],
+  "author": "Fotopainter Team",
+  "license": "MIT",
+  "devDependencies": {
+    "simple-git": "^3.22.0"
+  }
+}
+

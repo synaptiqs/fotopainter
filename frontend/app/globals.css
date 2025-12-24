@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+/* Custom CSS Variables for Fotopainter Brand */
+:root {
+  /* Brand Colors */
+  --color-sienna: #A0522D;
+  --color-teal: #008080;
+  --color-white: #FFFFFF;
+  --color-light-gray: #F5F5F5;
+  --color-dark-gray: #333333;
+  --color-black: #000000;
+  
+  /* Accent Colors */
+  --color-success: #10B981;
+  --color-error: #EF4444;
+  --color-warning: #F59E0B;
+  
+  /* Typography */
+  --font-poppins: 'Poppins', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+}
+
+@theme inline {
+  /* Brand Colors */
+  --color-sienna: #A0522D;
+  --color-teal: #008080;
+  --color-light-gray: #F5F5F5;
+  --color-dark-gray: #333333;
+  
+  /* Accent Colors */
+  --color-success: #10B981;
+  --color-error: #EF4444;
+  --color-warning: #F59E0B;
+  
+  /* Typography */
+  --font-heading: var(--font-poppins);
+  --font-body: var(--font-inter);
+}
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--color-white);
+  color: var(--color-dark-gray);
+  font-family: var(--font-inter);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-poppins);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 3rem; /* 48px */
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2rem; /* 32px */
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.5rem; /* 24px */
+  font-weight: 600;
+}
+
+/* Utility Classes */
+.text-heading {
+  font-family: var(--font-poppins);
+}
+
+.text-body {
+  font-family: var(--font-inter);
+}
